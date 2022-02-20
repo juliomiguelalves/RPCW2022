@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifesto>
+    <metadata>
+        <titulo>TPC1</titulo>
+        <data>19 de fevereiro de 2022</data>
+        <autor>Júlio Miguel de Sá Lima Magalhães Alves</autor>
+        <uc>Representação e Processamento de Conhecimento na Web</uc>
+    </metadata>
+    <resumo>
+        Para este trabalho, foi escolhido, de uma lista de temas possíveis, fazer uma página web sobre jacarés. 
+        Foi utilizada a biblioteca w3.css.
+
+    </resumo>
+    <resultados>
+        <html>
+            <nome>jacare.html</nome>
+        </html>
+        <css>
+            <nome>w3.css</nome>
+        </css>
+        <imagem>
+            <nome>images/100px-Alligator_sinensis_Distribution.png</nome>
+            <nome>images/100px-Caiman_latirostis_Distribution.png</nome>
+            <nome>images/100px-Paleosuchus_trigonatus_Distribution.png</nome>
+            <nome>images/Alligator_mississipiensis_Distribution.png</nome>
+            <nome>images/Caiman_crocodylus_Distribution.png</nome>
+            <nome>images/Caiman_yacare_Distribution.png</nome>
+            <nome>images/Florida_Alligator.jpg</nome>
+            <nome>images/Melanosuchus_niger_Distribution.png</nome>
+            <nome>images/Paleosuchus_palpebrosus_Distribution.png</nome>
+        </imagem>
+    </resultados>
+</manifesto>
