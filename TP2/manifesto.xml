@@ -1,0 +1,32 @@
+<doc>
+	<meta>
+		<titulo> TPC2: Fileserver</titulo>
+		<data> 2022-02-15</data>
+		<autor>
+			<id>PG47390</id>
+			<nome>Júlio Miguel de Sá Lima Magalhães Alves</nome>
+		</autor>
+		<uc>
+			<sigla>RPCW2022</sigla>
+			<nome>Representação e Processamento de Conhecimento na Web</nome>
+		</uc>
+	</meta>
+	<resumo>
+		<p>Trabalho cuja finalidade era, através de um dataset, criar uma página html para cada entrada e criar um fileserver capaz de ir buscar essas páginas</p>
+	</resumo>
+	<resultados>
+		<resultado>
+			<url>json2html.py</url>
+			<texto>Conversor JSON para html</texto>
+		</resultado>
+		<resultado>
+			<url>fileserver.js</url>
+			<texto>Fileserver</texto>
+		</resultado>
+        <resultado>
+			<url>index.html</url>
+			<texto>Página html que, ao clicar num título, nos redireciona para a página HTML do título em questão</texto>
+		</resultado>
+	</resultados>
+
+</doc>
