@@ -9,7 +9,6 @@ file = json.load(f)
 os.mkdir("./filmes")
 i=1
 for entry in file:
-    print(entry["title"])
     title= re.sub("/"," ",entry["title"])
     name= "./filmes/"+str(i)+".html"
     filenames.append(name)
@@ -40,7 +39,8 @@ for entry in file:
     html.write("</body>\n")
     html.write("</html>\n")
     i+=1
-    
+
+
 
 f.close()
 
@@ -57,9 +57,10 @@ for i,movie in enumerate(movies):
     aux = movie.replace("./filmes/","")
     aux = aux.replace(".html","")
     filenames[i] = filenames[i].replace("./","/")
-    print(filenames[i]+" filenames        aux: " + aux)
     index.write("<li><a href=\""+filenames[i]+"\">"+aux+"</a></li>\n")
 index.write("</ul>")
 
 index.write("</body>")
 index.write("</html>")
+
+print("Conversão finalizada!")
