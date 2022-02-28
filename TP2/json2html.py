@@ -8,6 +8,7 @@ filenames=[]
 file = json.load(f)
 os.mkdir("./filmes")
 i=1
+file.sort(key=lambda x :x["title"])
 for entry in file:
     title= re.sub("/"," ",entry["title"])
     name= "./filmes/"+str(i)+".html"
