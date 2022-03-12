@@ -1,0 +1,28 @@
+<doc>
+	<meta>
+		<titulo> TPC3: Escola de Música</titulo>
+		<data> 2022-03-10</data>
+		<autor>
+			<id>PG47390</id>
+			<nome>Júlio Miguel de Sá Lima Magalhães Alves</nome>
+		</autor>
+		<uc>
+			<sigla>RPCW2022</sigla>
+			<nome>Representação e Processamento de Conhecimento na Web</nome>
+		</uc>
+	</meta>
+	<resumo>
+		<p>Trabalho cuja finalidade era, correr uma api de dados na porta 3000 e o  serviço na porta 4000, que consistia em ir buscar os dados a essa api e apresentar em tabelas </p>
+	</resumo>
+	<resultados>
+		<resultado>
+			<url>db.json</url>
+			<texto>API de dados</texto>
+		</resultado>
+		<resultado>
+			<url>escolaMusica.js</url>
+			<texto>Serviço da escola de música</texto>
+		</resultado>
+	</resultados>
+
+</doc>
