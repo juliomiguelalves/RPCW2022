@@ -1,0 +1,16 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tarefas.js",
+  "scripts": {
+    "run": "node tarefas.js",
+    "dev": "npx nodemon tarefas.js"
+  },
+  "author": "juliomiguelalves",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "nodemon": "^2.0.15"
+  }
+}
