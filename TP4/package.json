@@ -2,10 +2,10 @@
   "name": "taskmanager",
   "version": "1.0.0",
   "description": "",
-  "main": "tarefas.js",
+  "main": "gestorTarefas.js",
   "scripts": {
-    "run": "node tarefas.js",
-    "dev": "npx nodemon tarefas.js"
+    "run": "node gestorTarefas.js",
+    "dev": "npx nodemon gestorTarefas.js"
   },
   "author": "juliomiguelalves",
   "license": "ISC",
