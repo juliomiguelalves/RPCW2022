@@ -87,8 +87,7 @@ function geraPagPrincipal( realizadas,pf, d){
     
     <h2>Gestor de tarefas</h2>
     <form class="w3-container" action="/tarefas" method="POST">
-                <label class="w3-text-teal"><b>id</b></label>
-                <input class="w3-input w3-border w3-light-grey" type="text" name="id">
+                <input class="w3-input w3-border w3-light-grey" type="hidden" name="id" >
           
                 <label class="w3-text-teal"><b>Descrição</b></label>
                 <input class="w3-input w3-border w3-light-grey" type="text" name="desc">
@@ -182,8 +181,6 @@ var galunoServer = http.createServer(function (req, res) {
                         
                         var realizadas = r.data
                         var porfazer = pf.data
-
-                        // Add code to render page with the student's list
                         res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
                         res.write(geraPagPrincipal(realizadas,porfazer,d))
                         res.end()
@@ -198,7 +195,6 @@ var galunoServer = http.createServer(function (req, res) {
             // GET /tarefas/:id/apagar
             else if(/\/tarefas\/(\w|\d)+\/apagar\?$/.test(req.url)){
                 var idTask = req.url.split("/")[2]
-                console.log(idTask)
                 axios.delete('http://localhost:3000/tarefas/'+idTask)
                     .then(resp =>{
                         res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
@@ -206,7 +202,7 @@ var galunoServer = http.createServer(function (req, res) {
                         res.end()                    
                     }).catch(error =>{
                         res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
-                        res.write('<p> Erro no POST: '+error+'</p>')
+                        res.write('<p> Erro no delete: '+error+'</p>')
                         res.write('<p><a href="/">Voltar</a></p>')
                         res.end()
                     })
