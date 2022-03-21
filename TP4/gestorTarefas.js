@@ -57,7 +57,7 @@ function geraPagEdicao(realizadas,pf,t){
             <input class="w3-input w3-border w3-light-grey" type="text" name="resp" value=${t.resp}>
 
             <label class="w3-text-teal"><b>Prazo</b></label>
-            <input class="w3-input w3-border w3-light-grey" type="text" name="data" value=${t.data}>
+            <input class="w3-input w3-border w3-light-grey" type="date" name="data" value=${t.data}>
 
             <input type="hidden" id="type" name="type" value="porfazer">
 
@@ -76,7 +76,7 @@ function geraPagEdicao(realizadas,pf,t){
             <form class="w3-container" action="/tarefas/${t.id}/done" method="POST">
                 <input type="hidden" id="desc" name="desc" value="${t.desc}">
                 <input type="hidden" id="resp" name="resp" value="${t.resp}">
-                <input type="hidden" id="data" name="data" value=${new Date()}>
+                <input type="hidden" id="data" name="data" >
                 <input type="hidden" id="type" name="type" value="realizadas">
                 <input type="submit" value="Feito">
             </form>
@@ -160,7 +160,7 @@ function geraPagPrincipal( realizadas,pf, d){
                 <input class="w3-input w3-border w3-light-grey" type="text" name="resp">
 
                 <label class="w3-text-teal"><b>Prazo</b></label>
-                <input class="w3-input w3-border w3-light-grey" type="text" name="data">
+                <input class="w3-input w3-border w3-light-grey" type="date" name="data">
 
                 <input type="hidden" id="type" name="type" value="porfazer">
 
@@ -179,7 +179,7 @@ function geraPagPrincipal( realizadas,pf, d){
             <form class="w3-container" action="/tarefas/${t.id}/done" method="POST">
                 <input type="hidden" id="desc" name="desc" value="${t.desc}">
                 <input type="hidden" id="resp" name="resp" value="${t.resp}">
-                <input type="hidden" id="data" name="data" value=${new Date()}>
+                <input type="hidden" id="data" name="data" >
                 <input type="hidden" id="type" name="type" value="realizadas">
                 <input type="submit" value="Feito">
             </form>
@@ -315,7 +315,6 @@ var galunoServer = http.createServer(function (req, res) {
             if(urls[2] == 'newtask'){
                 recuperaInfo(req,resultado => {
                     console.log('POST de aluno:' + JSON.stringify(resultado))
-                   
                     axios.post('http://localhost:3000/tarefas',resultado)
                     axios.all([
                         axios.get("http://localhost:3000/tarefas?type=realizadas"),
@@ -340,11 +339,18 @@ var galunoServer = http.createServer(function (req, res) {
             }
             else if (urls[3]=="done"){
                 axios.get("http://localhost:3000/tarefas/"+urls[2])
-                    .then(t =>{
+                    .then(async t =>{
                         task = t.data
-                        task['type']="realizadas"
-                        axios.delete("http://localhost:3000/tarefas/"+urls[2])
-                        axios.post("http://localhost:3000/tarefas",task)
+                        
+                        await axios.put("http://localhost:3000/tarefas/"+task.id,{
+                            "id":task.id,
+                            "desc": task.desc,
+                            "data": new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear(),
+                            "resp":task.resp,
+                            "type":"realizadas"
+                        
+                        })
+                        console.log(new Date().getDate()+"/"+new Date().getMonth()+"/"+new Date().getFullYear())
                         axios.all([
                             axios.get("http://localhost:3000/tarefas?type=realizadas"),
                             axios.get("http://localhost:3000/tarefas?type=porfazer")
@@ -366,33 +372,47 @@ var galunoServer = http.createServer(function (req, res) {
                     
                     })
             }
+           
             else if(urls[3]=="editado"){
-                recuperaInfo(req,resultado => {
+                recuperaInfo(req, async resultado => {
                     console.log('POST de aluno:' + JSON.stringify(resultado))
-                    axios.delete("http://localhost:3000/tarefas/"+urls[2])
-                    axios.post('http://localhost:3000/tarefas',resultado)
-                    axios.all([
-                        axios.get("http://localhost:3000/tarefas?type=realizadas"),
-                        axios.get("http://localhost:3000/tarefas?type=porfazer")
-                    ])
-                        .then(axios.spread((r,pf) => {
-                            
-                            var realizadas = r.data
-                            var porfazer = pf.data
-                            res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
-                            res.write(geraPagPrincipal(realizadas,porfazer,d))
-                            res.end()
-    
-                        }))
-                        .catch(function(erro){
-                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.write("<p>Não foi possi­vel obter a lista de tarefas...")
-                            res.end()
+
+                    axios.get("http://localhost:3000/tarefas/"+urls[2])
+                    .then(async t =>{
+                        task = t.data
+                        
+                        await axios.put("http://localhost:3000/tarefas/"+task.id,{
+                            "id":task.id,
+                            "desc": resultado.desc,
+                            "data":resultado.data,
+                            "resp":resultado.resp,
+                            "type":resultado.type
+                        
                         })
-                
-                })
-            }
-            
+                        axios.all([
+                            axios.get("http://localhost:3000/tarefas?type=realizadas"),
+                            axios.get("http://localhost:3000/tarefas?type=porfazer")
+                        ])
+                            .then(axios.spread((r,pf) => {
+                                
+                                var realizadas = r.data
+                                var porfazer = pf.data
+                                res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
+                                res.write(geraPagPrincipal(realizadas,porfazer,d))
+                                res.end()
+        
+                            }))
+                            .catch(function(erro){
+                                res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write("<p>Não foi possi­vel obter a lista de tarefas...")
+                                res.end()
+                            })
+                    
+                    })
+            })
+        }
+        
+                   
             else {
                 res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'})
                 res.write('<p>Recebi um POST não suportado.</p>')
