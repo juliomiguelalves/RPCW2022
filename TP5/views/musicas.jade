@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Lista de músicas
+  table    
+    tr  
+        th Id 
+        th Titulo 
+        th Provincia 
+    each m in musicas 
+        tr  
+            td=m.id 
+            td=m.tit
+            td=m.prov

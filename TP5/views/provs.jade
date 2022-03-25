@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1  Músicas do #{p}
+  ul
+  each prov in provs 
+    li 
+        a(href="/musicas/"+prov.id)=prov.tit
