@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 Ficheiros na base de dados 
+  h2 
+    a(href="/inserir") Submeter ficheiro
+  table 
+    tr 
+      th Date
+      th File 
+      th Size 
+      th Desc 
+      th Type 
+    each f in file 
+      tr 
+        td=f.date 
+        td=f.file 
+        td=f.size 
+        td=f.desc 
+        td=f.type
+        td 
+            form(action="/download/" + f.file, method="post")
+                input(type="submit", value="Download")
+        td
+            form(action="/apagar/" + f.file, method="post")
+                input(type="submit", value="Delete")

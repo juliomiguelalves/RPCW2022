@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+    h1 Inserir Ficheiro
+    form(action="/files", method="post", enctype="multipart/form-data")
+        div
+            label Select file
+            br
+            input(type="file", name="file")
+        div
+            label Text
+            br
+            input(type="text", name="desc")
+        div
+            input(type="submit", value="Registar")
+            input(type="reset", value="Limpar")
