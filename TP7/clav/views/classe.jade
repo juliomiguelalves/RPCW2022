@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  a(href="/") CLAV 
+  if data.nivel >1
+    a(href="/classes/" + data.pai.codigo) Página Anterior
+  h1 Classe: #{data.titulo}
+  p Descricao: #{data.descricao}
+  p Descendentes: 
+  ul 
+  each d in data.filhos
+    li=d.titulo 
+      a(href="/classes/"+d.codigo)=d.codigo
+
+  
+    if data.nivel == 3
+        p Processos Relacionados:
+            ul
+                each d in data.processosRelacionados
+                    if d.idRel == "eCruzadoCom" || d.idRel == "eComplementarDe" || d.idRel == "eSuplementoDe" || d.idRel == "eSuplementoPara"   
+                        li #{d.titulo} - 
+                            a(href="/classes/" + d.codigo)=d.codigo  
+    
